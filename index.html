@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Telangana Police Constable Practice</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f6f9;color:#17202a}
+header{background:#123b66;color:white;padding:22px 16px;text-align:center}
+header h1{margin:0 0 6px;font-size:25px}header p{margin:0}
+.container{max-width:900px;margin:20px auto;padding:0 14px}.card{background:white;border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 2px 10px #0001}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+button{border:0;border-radius:9px;padding:13px 16px;background:#1769aa;color:#fff;font-weight:bold;cursor:pointer}
+button.secondary{background:#566573}button.correct{background:#198754}button.wrong{background:#c0392b}
+.option{display:block;width:100%;text-align:left;background:#eef3f7;color:#17202a;margin:9px 0}.option:hover{background:#dce8f2}
+.hidden{display:none}.muted{color:#667085}.top{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+#timer{font-weight:bold;color:#c0392b}.progress{height:8px;background:#e5e7eb;border-radius:9px;overflow:hidden;margin:12px 0}.bar{height:100%;background:#1769aa;width:0}
+.small{font-size:13px}.score{font-size:40px;font-weight:bold;color:#1769aa;text-align:center}
+</style>
+</head>
+<body>
+<header><div style="font-size:28px;font-weight:900;letter-spacing:2px;margin-bottom:8px">DJ SINU 277</div><h1>🚔 Telangana Police Constable Practice</h1><p>Mains Exam Practice Portal</p></header>
+
+<div class="container">
+<section id="home">
+<div class="card">
+<h2>Practice & Improve</h2><p><b>✅ 100 questions are available in the Full Mock Test.</b></p>
+<p class="muted"><b>DJ Sinu 277</b> presents a 100-question Telangana Police Constable Mains practice test.</p>
+<div class="grid">
+<button onclick="startTest(100)">📝 Full Mock Test – 100 Questions</button>
+<button onclick="startTest(50)">📋 Mock Test – 50 Questions</button><button onclick="showSubjects()">📚 Subject Practice</button>
+<button onclick="showPrevious()">📄 Previous Papers</button>
+</div>
+</div>
+<div class="card">
+<h3>Subjects</h3>
+<div class="grid small">
+<div>🇮🇳 General Studies</div><div>⚖️ Indian Polity</div><div>📜 History</div>
+<div>🌍 Geography</div><div>💰 Economy</div><div>🔬 General Science</div>
+<div>🏛️ Telangana</div><div>🧠 Reasoning & Arithmetic</div>
+</div>
+</div>
+</section>
+
+<section id="subjects" class="hidden">
+<div class="card"><div class="top"><h2>Subject Practice</h2><button class="secondary" onclick="goHome()">Home</button></div><div id="subjectButtons" class="grid"></div></div>
+</section>
+
+<section id="previous" class="hidden">
+<div class="card"><div class="top"><h2>Previous Papers</h2><button class="secondary" onclick="goHome()">Home</button></div>
+<p class="muted">Add verified previous papers here. This starter version does not reproduce copyrighted papers.</p>
+<button onclick="startTest(100)">Practice Similar Questions</button></div>
+</section>
+
+<section id="quiz" class="hidden">
+<div class="card">
+<div class="top"><b id="qno"></b><span id="timer">10:00</span></div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<h2 id="question"></h2><div id="options"></div>
+<p id="explanation" class="muted"></p>
+<div class="top"><button id="next" onclick="nextQuestion()">Next</button><button class="secondary" onclick="goHome()">Exit</button></div>
+</div>
+</section>
+
+<section id="result" class="hidden">
+<div class="card">
+<h2 style="text-align:center">Test Result</h2><div class="score" id="score"></div>
+<p id="summary" style="text-align:center"></p>
+<div class="grid"><button onclick="startTest(100)">Retry</button><button class="secondary" onclick="goHome()">Home</button></div>
+</div>
+</section>
+</div>
+
+<script>
+const questions=[
+{subject:"General Studies",q:"Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"Indian Polity",q:"How many Fundamental Rights are currently guaranteed by the Constitution of India?",o:["5","6","7","8"],a:1,e:"There are six Fundamental Rights at present."},
+{subject:"History",q:"The Quit India Movement was launched in which year?",o:["1930","1942","1947","1919"],a:1,e:"The Quit India Movement began in August 1942."},
+{subject:"Geography",q:"Which is the longest river flowing entirely within India?",o:["Ganga","Godavari","Narmada","Krishna"],a:1,e:"The Godavari is the longest river flowing entirely within India."},
+{subject:"Economy",q:"Which institution replaced the Planning Commission?",o:["RBI","NITI Aayog","Finance Commission","SEBI"],a:1,e:"NITI Aayog replaced the Planning Commission in 2015."},
+{subject:"General Science",q:"Which gas is most abundant in Earth's atmosphere?",o:["Oxygen","Nitrogen","Carbon dioxide","Hydrogen"],a:1,e:"Nitrogen makes up about 78% of Earth's atmosphere."},
+{subject:"Telangana",q:"Telangana became a separate state on:",o:["2 June 2014","1 November 1956","15 August 1947","26 January 1950"],a:0,e:"Telangana was formed as India's 29th state on 2 June 2014."},
+{subject:"Reasoning & Arithmetic",q:"If 20% of a number is 40, what is the number?",o:["100","150","200","250"],a:2,e:"40 ÷ 0.20 = 200."},
+{subject:"Reasoning & Arithmetic",q:"Find the next number: 2, 4, 8, 16, ?",o:["20","24","30","32"],a:3,e:"Each number is multiplied by 2."},
+{subject:"General Studies",q:"What is the capital of Telangana?",o:["Warangal","Nizamabad","Hyderabad","Karimnagar"],a:2,e:"Hyderabad is the capital of Telangana."},
+{subject:"Telangana GK",q:"Telangana was officially formed as a state on which date?",o:["1 June 2014","2 June 2014","5 June 2014","10 June 2014"],a:1,e:"Telangana was formed on 2 June 2014."},
+{subject:"Indian Polity",q:"Who is the constitutional head of the Union of India?",o:["Prime Minister","President","Chief Justice","Speaker"],a:1,e:"The President is the constitutional head of the Union."},
+{subject:"History",q:"Who founded the Maurya Empire?",o:["Ashoka","Chandragupta Maurya","Harsha","Samudragupta"],a:1,e:"Chandragupta Maurya founded the Maurya Empire."},
+{subject:"Geography",q:"Which latitude passes through India?",o:["Equator","Tropic of Cancer","Tropic of Capricorn","Arctic Circle"],a:1,e:"The Tropic of Cancer passes through India."},
+{subject:"Economy",q:"The Reserve Bank of India is India's:",o:["Central bank","Commercial bank","Cooperative bank","Development bank only"],a:0,e:"RBI is the central bank of India."},
+{subject:"General Science",q:"Which organ pumps blood through the human body?",o:["Lungs","Kidney","Heart","Liver"],a:2,e:"The heart pumps blood through the body."},
+{subject:"Arithmetic",q:"What is 25% of 200?",o:["25","40","50","75"],a:2,e:"25% of 200 is 50."},
+{subject:"Reasoning & Arithmetic",q:"Find the odd one out: 2, 4, 6, 9, 10",o:["2","6","9","10"],a:2,e:"9 is odd; the others are even."},
+{subject:"Telangana GK",q:"Which city is known as the 'City of Pearls'?",o:["Warangal","Hyderabad","Nalgonda","Karimnagar"],a:1,e:"Hyderabad is popularly known as the City of Pearls."},
+{subject:"Indian Polity",q:"The Fundamental Duties are included in which part of the Constitution?",o:["Part III","Part IVA","Part V","Part VI"],a:1,e:"Fundamental Duties are in Part IVA."},
+{subject:"History",q:"The Battle of Plassey was fought in:",o:["1757","1764","1857","1947"],a:0,e:"The Battle of Plassey took place in 1757."},
+{subject:"Geography",q:"Which is the largest state of India by area?",o:["Maharashtra","Madhya Pradesh","Rajasthan","Uttar Pradesh"],a:2,e:"Rajasthan is the largest Indian state by area."},
+{subject:"Economy",q:"GDP stands for:",o:["Gross Domestic Product","General Domestic Price","Gross Development Plan","Government Domestic Product"],a:0,e:"GDP means Gross Domestic Product."},
+{subject:"General Science",q:"Water boils at sea level at approximately:",o:["50°C","75°C","100°C","120°C"],a:2,e:"Water boils at about 100°C at sea level."},
+{subject:"Arithmetic",q:"If a shirt costs ₹500 and is discounted by 10%, the sale price is:",o:["₹450","₹460","₹475","₹490"],a:0,e:"10% of ₹500 is ₹50, so the price is ₹450."},
+{subject:"Reasoning & Arithmetic",q:"Complete: A, C, E, G, ?",o:["H","I","J","K"],a:1,e:"The series advances by two letters."},
+{subject:"Telangana GK",q:"The Godavari is an important river flowing through:",o:["Telangana","Punjab only","Rajasthan only","Kerala only"],a:0,e:"The Godavari flows through Telangana."},
+{subject:"Indian Polity",q:"The minimum voting age in India is:",o:["16","18","21","25"],a:1,e:"Indian citizens can vote from age 18, subject to electoral eligibility."},
+{subject:"History",q:"India became a Republic on:",o:["15 August 1947","26 January 1950","26 November 1949","2 October 1950"],a:1,e:"India became a republic on 26 January 1950."},
+{subject:"Geography",q:"Which soil is widely associated with cotton cultivation?",o:["Black soil","Laterite soil","Desert soil","Mountain soil"],a:0,e:"Black soil is especially suitable for cotton."},
+{subject:"General Studies",q:"Practice Question 31: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 32: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 33: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 34: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 35: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 36: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 37: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 38: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 39: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 40: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 41: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 42: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 43: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 44: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 45: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 46: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 47: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 48: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 49: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 50: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 51: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 52: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 53: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 54: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 55: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 56: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 57: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 58: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 59: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 60: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 61: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 62: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 63: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 64: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 65: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 66: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 67: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 68: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 69: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 70: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 71: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 72: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 73: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 74: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 75: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 76: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 77: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 78: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 79: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 80: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 81: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 82: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 83: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 84: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 85: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 86: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 87: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 88: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 89: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 90: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 91: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 92: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 93: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 94: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 95: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 96: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 97: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 98: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 99: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."},
+{subject:"General Studies",q:"Practice Question 100: Who is known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1,e:"Practice question. Dr. B. R. Ambedkar chaired the Drafting Committee."}
+];
+
+let current=[],idx=0,score=0,answered=false,time=600,timerId;
+
+function hideAll(){["home","subjects","previous","quiz","result"].forEach(x=>document.getElementById(x).classList.add("hidden"))}
+function goHome(){clearInterval(timerId);hideAll();document.getElementById("home").classList.remove("hidden")}
+function showSubjects(){hideAll();document.getElementById("subjects").classList.remove("hidden");let s=[...new Set(questions.map(x=>x.subject))];document.getElementById("subjectButtons").innerHTML=s.map(x=>`<button onclick="startSubject('${x.replaceAll("'","\\'")}')">${x}</button>`).join("")}
+function showPrevious(){hideAll();document.getElementById("previous").classList.remove("hidden")}
+function startSubject(s){current=questions.filter(x=>x.subject===s);begin()}
+function startTest(count=100){current=[...questions].slice(0,Math.min(count,questions.length));begin()}
+function begin(){idx=0;score=0;time=600;hideAll();document.getElementById("quiz").classList.remove("hidden");clearInterval(timerId);timerId=setInterval(tick,1000);render()}
+function tick(){time--;let m=Math.floor(time/60),sec=String(time%60).padStart(2,"0");document.getElementById("timer").textContent=`${m}:${sec}`;if(time<=0)finish()}
+function render(){answered=false;let q=current[idx];document.getElementById("qno").textContent=`Question ${idx+1} / ${current.length}`;document.getElementById("question").textContent=q.q;document.getElementById("bar").style.width=((idx/current.length)*100)+"%";document.getElementById("explanation").textContent="";document.getElementById("options").innerHTML=q.o.map((x,i)=>`<button class="option" onclick="answer(${i},this)">${String.fromCharCode(65+i)}. ${x}</button>`).join("");document.getElementById("next").textContent=idx===current.length-1?"Finish":"Next"}
+function answer(i,el){if(answered)return;answered=true;let q=current[idx];document.querySelectorAll(".option").forEach((b,j)=>{if(j===q.a)b.classList.add("correct");if(j===i&&i!==q.a)b.classList.add("wrong")});if(i===q.a)score++;document.getElementById("explanation").textContent="Explanation: "+q.e}
+function nextQuestion(){if(!answered){alert("Please select an answer.");return}if(idx<current.length-1){idx++;render()}else finish()}
+function finish(){clearInterval(timerId);hideAll();document.getElementById("result").classList.remove("hidden");document.getElementById("score").textContent=`${score} / ${current.length}`;document.getElementById("summary").textContent=`Percentage: ${Math.round(score/current.length*100)}%`}
+</script>
+</body>
+</html>
