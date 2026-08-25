@@ -678,4 +678,168 @@ document.querySelectorAll("section").forEach(function(s){
 s.classList.add("hidden");
 });
 
-document.getElementById(id).classList.remove("hidden")
+document.getElementById(id).classList.remove("hidden");
+
+if(button){
+document.querySelectorAll(".nav button").forEach(function(b){
+b.classList.remove("active");
+});
+button.classList.add("active");
+}
+
+window.scrollTo(0,0);
+}
+
+function renderSubjects(){
+
+var area=document.getElementById("subjectCards");
+area.innerHTML="";
+
+subjects.forEach(function(subject,index){
+
+var card=document.createElement("div");
+card.className="card click";
+
+card.innerHTML=
+'<div class="icon">'+subject.icon+'</div>'+
+'<h3>'+subject.name+'</h3>'+
+'<p class="muted">'+subject.chapters.length+' Chapters</p>'+
+'<button class="action">📖 Start Learning</button>';
+
+card.onclick=function(){
+page("learn",document.querySelectorAll(".nav button")[1]);
+showChapters(index);
+};
+
+area.appendChild(card);
+
+});
+
+updateStats();
+}
+
+function updateStats(){
+
+var chapters=0;
+
+subjects.forEach(function(s){
+chapters += s.chapters.length;
+});
+
+document.getElementById("subjectCount").textContent=subjects.length;
+document.getElementById("chapterCount").textContent=chapters;
+document.getElementById("completedCount").textContent=0;
+document.getElementById("percent").textContent="0%";
+
+}
+
+function showChapters(index){
+
+selectedSubject=index;
+
+var subject=subjects[index];
+var area=document.getElementById("learnArea");
+
+area.innerHTML=
+'<div class="reader">'+
+'<button class="back" onclick="page(\'home\',document.querySelector(\'.nav button\'))">← Back</button>'+
+'<h2>'+subject.icon+' '+subject.name+'</h2>'+
+'<p class="muted">Choose a chapter.</p>'+
+'</div>';
+
+var grid=document.createElement("div");
+grid.className="grid";
+
+subject.chapters.forEach(function(chapter,i){
+
+var card=document.createElement("div");
+card.className="card click";
+
+card.innerHTML=
+'<div class="icon">📖</div>'+
+'<h3>'+chapter[0]+'</h3>'+
+'<p class="muted">'+chapter[1]+'</p>'+
+'<button class="action">Start Lesson</button>';
+
+card.onclick=function(){
+showLesson(index,i);
+};
+
+grid.appendChild(card);
+
+});
+
+area.appendChild(grid);
+}
+
+function showLesson(subjectIndex,chapterIndex){
+
+var subject=subjects[subjectIndex];
+var chapter=subject.chapters[chapterIndex];
+
+document.getElementById("learnArea").innerHTML=
+
+'<div class="reader">'+
+'<button class="back" onclick="showChapters('+subjectIndex+')">← Back</button>'+
+'<h2>'+subject.icon+' '+chapter[0]+'</h2>'+
+'<h3>'+chapter[1]+'</h3>'+
+'<p><b>English</b></p>'+
+'<p>'+chapter[2]+'</p>'+
+'<p><b>తెలుగు</b></p>'+
+'<p>'+chapter[3]+'</p>'+
+'<div class="important">⭐ Important: Revise this lesson after reading.</div>'+
+'<button class="action" onclick="completeLesson('+subjectIndex+','+chapterIndex+')">✅ Mark Lesson Complete</button>'+
+'</div>';
+
+}
+
+function completeLesson(subjectIndex,chapterIndex){
+
+var key=subjectIndex+"-"+chapterIndex;
+
+completed[key]=true;
+
+localStorage.setItem("completed",JSON.stringify(completed));
+
+updateStats();
+
+showLesson(subjectIndex,chapterIndex);
+}
+
+function language(lang,button){
+
+currentLanguage=lang;
+localStorage.setItem("language",lang);
+
+document.querySelectorAll(".lang button").forEach(function(b){
+b.classList.remove("active");
+});
+
+button.classList.add("active");
+}
+
+function renderRevision(){
+
+var area=document.getElementById("revisionArea");
+area.innerHTML="";
+
+subjects.forEach(function(subject){
+
+var card=document.createElement("div");
+card.className="card";
+
+var html='<div class="icon">'+subject.icon+'</div><h3>'+subject.name+'</h3>';
+
+subject.chapters.forEach(function(chapter){
+html+='<p><b>'+chapter[0]+'</b><br><span class="muted">'+chapter[2]+'</span></p>';
+});
+
+card.innerHTML=html;
+area.appendChild(card);
+
+});
+}
+
+renderSubjects();
+renderRevision();
+updateStats();
