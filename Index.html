@@ -1,845 +1,511 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Telangana Police Constable Preparation</title>
-
-<style>
-*{box-sizing:border-box}
-
-body{
-margin:0;
-font-family:Arial,system-ui,sans-serif;
-background:#07111f;
-color:#f2f7fb;
-}
-
-header{
-background:linear-gradient(135deg,#082238,#0d3048);
-padding:25px 18px;
-border-bottom:1px solid #28516d;
-}
-
-.header{
-max-width:1100px;
-margin:auto;
-}
-
-.logo{
-font-size:28px;
-font-weight:800;
-}
-
-.sub{
-color:#a9c0d0;
-margin-top:7px;
-}
-
-.container{
-max-width:1100px;
-margin:auto;
-padding:18px;
-}
-
-.nav{
-display:flex;
-flex-wrap:wrap;
-gap:9px;
-margin-bottom:20px;
-}
-
-.nav button{
-background:#10283d;
-color:white;
-border:1px solid #2a5069;
-padding:11px 15px;
-border-radius:13px;
-font-size:15px;
-}
-
-.nav button.active{
-background:#20c5f3;
-color:#04131b;
-font-weight:bold;
-}
-
-.hero{
-background:linear-gradient(145deg,#102d43,#12364e);
-border:1px solid #2c5872;
-border-radius:25px;
-padding:25px;
-}
-
-.hero h1{
-font-size:38px;
-margin:0 0 12px;
-}
-
-.hero p{
-color:#b5c9d6;
-line-height:1.7;
-font-size:17px;
-}
-
-.stats{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:12px;
-margin-top:20px;
-}
-
-.stat{
-background:#071b2d;
-border:1px solid #294c65;
-border-radius:17px;
-padding:18px;
-}
-
-.stat b{
-display:block;
-font-size:28px;
-}
-
-.stat span{
-color:#9bb2c1;
-}
-
-h2{
-margin-top:28px;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:13px;
-}
-
-.card{
-background:#0d2335;
-border:1px solid #28506a;
-border-radius:18px;
-padding:18px;
-}
-
-.card.click{
-cursor:pointer;
-}
-
-.card.click:hover{
-border-color:#20c5f3;
-transform:translateY(-2px);
-}
-
-.icon{
-font-size:30px;
-}
-
-.card h3{
-margin:9px 0;
-}
-
-.muted{
-color:#9eb5c5;
-}
-
-.progress{
-height:8px;
-background:#193448;
-border-radius:20px;
-overflow:hidden;
-margin-top:13px;
-}
-
-.progress div{
-height:100%;
-background:#20c5f3;
-}
-
-.reader{
-margin-top:18px;
-background:#0d2335;
-border:1px solid #28506a;
-border-radius:20px;
-padding:22px;
-}
-
-.reader p{
-font-size:17px;
-line-height:1.8;
-color:#d9e6ed;
-}
-
-.important{
-background:#102f45;
-border-left:4px solid #20c5f3;
-padding:14px;
-border-radius:8px;
-margin:15px 0;
-line-height:1.7;
-}
-
-button{
-cursor:pointer;
-font:inherit;
-}
-
-.action{
-background:#20c5f3;
-border:0;
-padding:12px 16px;
-border-radius:12px;
-font-weight:bold;
-}
-
-.secondary{
-background:#10283d;
-color:white;
-border:1px solid #2a5069;
-padding:11px 15px;
-border-radius:12px;
-}
-
-.lang{
-display:flex;
-gap:8px;
-flex-wrap:wrap;
-margin-top:15px;
-}
-
-.lang button{
-background:#10283d;
-color:white;
-border:1px solid #2a5069;
-padding:9px 13px;
-border-radius:10px;
-}
-
-.lang button.active{
-background:#20c5f3;
-color:#03131b;
-font-weight:bold;
-}
-
-.question{
-background:#0d2335;
-border:1px solid #28506a;
-border-radius:18px;
-padding:18px;
-margin:12px 0;
-}
-
-.option{
-display:block;
-width:100%;
-text-align:left;
-background:#10283d;
-color:white;
-border:1px solid #2a5069;
-padding:12px;
-border-radius:10px;
-margin:7px 0;
-}
-
-.correct{
-background:#16452f!important;
-border-color:#40d58d!important;
-}
-
-.wrong{
-background:#4a2020!important;
-border-color:#ff7070!important;
-}
-
-.back{
-background:#10283d;
-color:white;
-border:1px solid #2a5069;
-padding:10px 14px;
-border-radius:10px;
-}
-
-.hidden{
-display:none;
-}
-
-footer{
-text-align:center;
-padding:40px 15px;
-color:#718a9b;
-}
-
-@media(max-width:650px){
-.stats{
-grid-template-columns:1fr 1fr;
-}
-
-.hero h1{
-font-size:30px;
-}
-}
-</style>
-</head>
-
-<body>
-
-<header>
-<div class="header">
-<div class="logo">🚔 Telangana Police Constable Preparation</div>
-<div class="sub">Learn • Read • Revise • Practice • Track Progress</div>
-</div>
-</header>
-
-<div class="container">
-
-<div class="nav">
-<button class="active" onclick="page('home',this)">🏠 Home</button>
-<button onclick="page('learn',this)">📚 Learn Path</button>
-<button onclick="page('daily',this)">🎯 Daily Questions</button>
-<button onclick="page('revision',this)">⭐ Quick Revision</button>
-<button onclick="page('plan',this)">📅 4 Month Plan</button>
-</div>
-
-<section id="home">
-
-<div class="hero">
-
-<h1>Study Smart for Telangana Police Constable</h1>
-
-<p>
-Complete your preparation chapter by chapter.
-Read the lesson, understand important points,
-revise and practice questions.
-</p>
-
-<div class="stats">
-
-<div class="stat">
-<b id="subjectCount">0</b>
-<span>Subjects</span>
-</div>
-
-<div class="stat">
-<b id="chapterCount">0</b>
-<span>Chapters</span>
-</div>
-
-<div class="stat">
-<b id="completedCount">0</b>
-<span>Lessons Completed</span>
-</div>
-
-<div class="stat">
-<b id="percent">0%</b>
-<span>Progress</span>
-</div>
-
-</div>
-</div>
-
-<h2>📚 Start Learning</h2>
-
-<div class="grid" id="subjectCards"></div>
-
-</section>
-
-
-<section id="learn" class="hidden">
-
-<div class="hero">
-
-<h2>📚 Learn Path</h2>
-
-<p>
-Choose a subject, then choose a chapter and read the lesson.
-</p>
-
-<div class="lang">
-<button class="active" onclick="language('both',this)">English + తెలుగు</button>
-<button onclick="language('en',this)">English</button>
-<button onclick="language('te',this)">తెలుగు</button>
-</div>
-
-</div>
-
-<div id="learnArea"></div>
-
-</section>
-
-
-<section id="daily" class="hidden">
-
-<div class="hero">
-
-<h2>🎯 Daily Questions</h2>
-
-<p>
-Questions automatically change according to the day.
-</p>
-
-</div>
-
-<div id="questions"></div>
-
-</section>
-
-
-<section id="revision" class="hidden">
-
-<div class="hero">
-
-<h2>⭐ Quick Revision</h2>
-
-<p>
-Important points from every subject.
-</p>
-
-</div>
-
-<div id="revisionArea"></div>
-
-</section>
-
-
-<section id="plan" class="hidden">
-
-<div class="hero">
-
-<h2>📅 4 Month Study Plan</h2>
-
-<p>
-A simple four-month preparation path.
-</p>
-
-</div>
-
-<div class="grid">
-
-<div class="card">
-<div class="icon">1️⃣</div>
-<h3>Month 1</h3>
-<p class="muted">
-Arithmetic<br>
-Reasoning<br>
-Indian History<br>
-Telangana History
-</p>
-</div>
-
-<div class="card">
-<div class="icon">2️⃣</div>
-<h3>Month 2</h3>
-<p class="muted">
-Indian Geography<br>
-Telangana Geography<br>
-Indian Polity<br>
-Economy
-</p>
-</div>
-
-<div class="card">
-<div class="icon">3️⃣</div>
-<h3>Month 3</h3>
-<p class="muted">
-General Science<br>
-English<br>
-Current Affairs<br>
-Chapter Questions
-</p>
-</div>
-
-<div class="card">
-<div class="icon">4️⃣</div>
-<h3>Month 4</h3>
-<p class="muted">
-Full Revision<br>
-Mock Tests<br>
-Previous Questions<br>
-Daily Practice
-</p>
-</div>
-
-</div>
-
-<div class="reader">
-
-<h3>⏰ Daily Routine</h3>
-
-<p><b>Morning:</b> New lesson – 45 minutes</p>
-
-<p><b>Afternoon:</b> Revision – 30 minutes</p>
-
-<p><b>Evening:</b> Questions – 45 minutes</p>
-
-<p><b>Night:</b> Quick revision – 15 minutes</p>
-
-<div class="important">
-⭐ Study every day. Consistency is more important than studying for one day and stopping for several days.
-</div>
-
-</div>
-
-</section>
-
-</div>
-
-<footer>
-Telangana Police Constable Preparation • Free Study Website
-</footer>
-
-
-<script>
-
-/* ================================
-   ALL SUBJECTS AND CHAPTERS
-================================ */
-
-var subjects = [
-
-{
-name:"Arithmetic",
-icon:"🧮",
-chapters:[
-["Number System","సంఖ్యా వ్యవస్థ","Natural numbers, whole numbers, integers, prime numbers and factors.","సహజ సంఖ్యలు, పూర్ణ సంఖ్యలు, పూర్ణాంకాలు, ప్రధాన సంఖ్యలు మరియు గుణకాలు."],
-["Simplification","సరళీకరణ","Learn BODMAS: Brackets, Orders, Division, Multiplication, Addition and Subtraction.","BODMAS నియమాన్ని నేర్చుకోండి."],
-["HCF and LCM","HCF మరియు LCM","HCF is the greatest common factor. LCM is the smallest common multiple.","HCF గరిష్ఠ సామాన్య గుణకం. LCM కనిష్ఠ సామాన్య గుణకం."],
-["Ratio and Proportion","నిష్పత్తి మరియు సమానుపాతం","Ratio compares two quantities. Proportion shows equality between ratios.","నిష్పత్తి రెండు పరిమాణాలను పోలుస్తుంది."],
-["Percentage","శాతం","Percentage means per hundred. 25% equals one fourth.","శాతం అంటే ప్రతి వందకు. 25% అంటే నాలుగో వంతు."],
-["Average","సగటు","Average equals total divided by number of observations.","సగటు = మొత్తం ÷ సంఖ్య."],
-["Profit and Loss","లాభ నష్టం","Profit = Selling Price minus Cost Price. Loss = Cost Price minus Selling Price.","లాభం = అమ్మక ధర - కొనుగోలు ధర. నష్టం = కొనుగోలు ధర - అమ్మక ధర."],
-["Simple Interest","సాధారణ వడ్డీ","SI = P × R × T ÷ 100.","SI = P × R × T ÷ 100."],
-["Time and Work","కాలం మరియు పని","Learn work rates and combined work.","పని రేట్లు మరియు కలిపి పని ప్రశ్నలు నేర్చుకోండి."],
-["Time Speed Distance","కాలం వేగం దూరం","Distance = Speed × Time.","దూరం = వేగం × కాలం."]
-]
-},
-
-{
-name:"Reasoning",
-icon:"🧠",
-chapters:[
-["Analogy","సామ్యం","Find the relationship between two pairs.","రెండు జంటల మధ్య సంబంధాన్ని గుర్తించండి."],
-["Classification","వర్గీకరణ","Find the item that does not belong to the group.","సమూహానికి సరిపోని అంశాన్ని గుర్తించండి."],
-["Number Series","సంఖ్యా శ్రేణులు","Look for addition, subtraction, multiplication and other patterns.","కూడిక, తీసివేత, గుణకారం వంటి నమూనాలను గుర్తించండి."],
-["Alphabet Series","అక్షర శ్రేణులు","Remember A=1 through Z=26.","A=1 నుంచి Z=26 వరకు గుర్తుంచుకోండి."],
-["Coding Decoding","కోడింగ్ డీకోడింగ్","Find the rule used to change letters or words into codes.","అక్షరాలు లేదా పదాలు కోడ్‌గా మారే నియమాన్ని గుర్తించండి."],
-["Blood Relations","రక్త సంబంధాలు","Use a family tree to solve relationship questions.","సంబంధాల ప్రశ్నలకు కుటుంబ వృక్షం ఉపయోగించండి."],
-["Direction Sense","దిశా జ్ఞానం","Remember North, South, East and West.","ఉత్తరం, దక్షిణం, తూర్పు, పడమర గుర్తుంచుకోండి."],
-["Ranking","ర్యాంకింగ్","Use left and right rank relationships.","ఎడమ మరియు కుడి ర్యాంకులను ఉపయోగించండి."]
-]
-},
-
-{
-name:"Indian History",
-icon:"🇮🇳",
-chapters:[
-["Indus Valley Civilization","సింధు లోయ నాగరికత","Harappa, Mohenjo-daro, Dholavira and Lothal are important sites. Great Bath is at Mohenjo-daro. Lothal is famous for its dockyard.","హరప్పా, మొహెంజోదారో, ధోలవీరా, లోథల్ ముఖ్య ప్రదేశాలు. గ్రేట్ బాత్ మొహెంజోదారోలో ఉంది. లోథల్ డాక్‌యార్డ్‌కు ప్రసిద్ధి."],
-["Vedic Age","వేద కాలం","Study Early Vedic and Later Vedic society, religion and political institutions.","ప్రారంభ మరియు తరువాతి వేద కాలాల సమాజం, మతం, రాజకీయ సంస్థలను చదవండి."],
-["Buddhism","బౌద్ధం","Gautama Buddha taught the Four Noble Truths and Eightfold Path.","గౌతమ బుద్ధుడు నాలుగు ఆర్య సత్యాలు, అష్టాంగ మార్గాన్ని బోధించాడు."],
-["Jainism","జైనిజం","Mahavira was the 24th Tirthankara. Ahimsa is an important principle.","మహావీరుడు 24వ తీర్థంకరుడు. అహింస ముఖ్యమైన సూత్రం."],
-["Mauryan Empire","మౌర్య సామ్రాజ్యం","Chandragupta Maurya founded the empire. Ashoka is associated with the Kalinga War.","చంద్రగుప్త మౌర్యుడు సామ్రాజ్యాన్ని స్థాపించాడు. అశోకుడు కళింగ యుద్ధంతో సంబంధం కలిగి ఉన్నాడు."],
-["Gupta Empire","గుప్త సామ్రాజ్యం","The Gupta period is important for science, mathematics, literature and art.","గుప్త కాలం విజ్ఞానం, గణితం, సాహిత్యం మరియు కళలకు ప్రసిద్ధి."],
-["Delhi Sultanate","ఢిల్లీ సుల్తానేట్","Major dynasties include Mamluk, Khilji, Tughlaq, Sayyid and Lodi.","మమలూక్, ఖిల్జీ, తుగ్లక్, సయ్యద్, లోదీ ప్రధాన వంశాలు."],
-["Vijayanagara Empire","విజయనగర సామ్రాజ్యం","Harihara and Bukka founded the empire. Hampi was an important centre.","హరిహర, బుక్కలు సామ్రాజ్యాన్ని స్థాపించారు. హంపి ముఖ్య కేంద్రం."],
-["Mughal Empire","మొఘల్ సామ్రాజ్యం","Babur founded the Mughal Empire in India. Akbar expanded it.","బాబర్ మొఘల్ సామ్రాజ్యాన్ని స్థాపించాడు. అక్బర్ విస్తరించాడు."],
-["Revolt of 1857","1857 తిరుగుబాటు","Important leaders included Rani Lakshmibai, Bahadur Shah Zafar and Tantia Tope.","రాణి లక్ష్మీబాయి, బహదూర్ షా జఫర్, తాంతియా టోపే ముఖ్య నాయకులు."],
-["Indian National Movement","భారత జాతీయోద్యమం","Important movements include Non-Cooperation, Civil Disobedience and Quit India.","సహాయ నిరాకరణ, శాసనోల్లంఘన, క్విట్ ఇండియా ముఖ్య ఉద్యమాలు."]
-]
-},
-
-{
-name:"Telangana History",
-icon:"🟢",
-chapters:[
-["Kakatiyas","కాకతీయులు","Warangal was a major Kakatiya centre. Rudrama Devi was an important ruler.","వరంగల్ కాకతీయుల ప్రధాన కేంద్రం. రుద్రమదేవి ముఖ్య పాలకురాలు."],
-["Qutb Shahis","కుతుబ్ షాహీలు","The Qutb Shahi dynasty ruled Golconda. Charminar is associated with this period.","కుతుబ్ షాహీలు గోల్కొండను పాలించారు. చార్మినార్ ఈ కాలంతో సంబంధం కలిగి ఉంది."],
-["Nizam Rule","నిజాం పాలన","Study Hyderabad State, administration and social conditions.","హైదరాబాద్ రాష్ట్రం, పరిపాలన మరియు సామాజిక పరిస్థితులను చదవండి."],
-["Telangana Armed Struggle","తెలంగాణ సాయుధ పోరాటం","A peasant struggle developed against feudal exploitation.","భూస్వామ్య దోపిడీకి వ్యతిరేకంగా రైతాంగ పోరాటం జరిగింది."],
-["Hyderabad Integration 1948","1948 హైదరాబాద్ విలీనం","Hyderabad State integrated into the Indian Union in 1948 after Operation Polo.","ఆపరేషన్ పోలో తర్వాత 1948లో హైదరాబాద్ రాష్ట్రం భారత యూనియన్‌లో విలీనం అయింది."],
-["Andhra State 1953","1953 ఆంధ్ర రాష్ట్రం","Andhra State was formed in 1953. Kurnool was its initial capital.","1953లో ఆంధ్ర రాష్ట్రం ఏర్పడింది. కర్నూలు ప్రారంభ రాజధాని."],
-["Gentlemen's Agreement","జెంటిల్‌మెన్స్ అగ్రిమెంట్","Important agreement connected with the 1956 merger and Telangana safeguards.","1956 విలీనం మరియు తెలంగాణ రక్షణలకు సంబంధించిన ముఖ్య ఒప్పందం."],
-["1969 Telangana Movement","1969 తెలంగాణ ఉద్యమం","A major Telangana movement demanded implementation of safeguards.","రక్షణలను అమలు చేయాలని 1969లో ముఖ్య ఉద్యమం జరిగింది."],
-["Telangana Movement","తెలంగాణ ఉద్యమం","The separate-state movement became stronger in the 2000s.","2000లలో ప్రత్యేక రాష్ట్ర ఉద్యమం మరింత బలపడింది."],
-["Telangana Formation 2014","2014 తెలంగాణ రాష్ట్ర ఏర్పాటు","Telangana became a separate state on 2 June 2014.","2 జూన్ 2014న తెలంగాణ ప్రత్యేక రాష్ట్రంగా ఏర్పడింది."]
-]
-},
-
-{
-name:"Indian Geography",
-icon:"🌍",
-chapters:[
-["Physical Divisions","భౌగోళిక విభాగాలు","Study Himalayas, Northern Plains, Peninsular Plateau, Coastal Plains and Islands.","హిమాలయాలు, ఉత్తర మైదానాలు, ద్వీపకల్ప పీఠభూమి, తీర మైదానాలు, దీవులను చదవండి."],
-["Indian Rivers","భారత నదులు","Study Ganga, Brahmaputra, Godavari, Krishna and other major rivers.","గంగా, బ్రహ్మపుత్ర, గోదావరి, కృష్ణ వంటి ప్రధాన నదులను చదవండి."],
-["Climate and Monsoon","వాతావరణం మరియు రుతుపవనాలు","The southwest monsoon provides much of India's rainfall.","నైరుతి రుతుపవనం భారతదేశంలో ఎక్కువ వర్షపాతాన్ని అందిస్తుంది."],
-["Soils","నేలలు","Study alluvial, black, red and laterite soils.","ఒండ్రు, నల్ల, ఎర్ర మరియు లేటరైట్ నేలలను చదవండి."],
-["Agriculture","వ్యవసాయం","Study Kharif and Rabi crops and their seasons.","ఖరీఫ్ మరియు రబీ పంటలు, వాటి కాలాలను చదవండి."]
-]
-},
-
-{
-name:"Telangana Geography",
-icon:"📍",
-chapters:[
-["Location and Boundaries","స్థానం మరియు సరిహద్దులు","Telangana is a landlocked state in southern India.","తెలంగాణ దక్షిణ భారతదేశంలోని సముద్రతీరం లేని రాష్ట్రం."],
-["Rivers","నదులు","Godavari and Krishna are major river systems.","గోదావరి మరియు కృష్ణ ప్రధాన నదీ వ్యవస్థలు."],
-["Soils","నేలలు","Red and black soils are important in Telangana.","తెలంగాణలో ఎర్ర మరియు నల్ల నేలలు ముఖ్యమైనవి."],
-["Irrigation Projects","సాగునీటి ప్రాజెక్టులు","Study important irrigation projects, rivers and water management.","ముఖ్య సాగునీటి ప్రాజెక్టులు, నదులు మరియు నీటి నిర్వహణను చదవండి."]
-]
-},
-
-{
-name:"Indian Polity",
-icon:"🏛️",
-chapters:[
-["Indian Constitution","భారత రాజ్యాంగం","The Constitution is the supreme legal framework of India.","రాజ్యాంగం భారతదేశపు పరమ న్యాయ చట్రం."],
-["Preamble","పీఠిక","Study Sovereign, Socialist, Secular, Democratic and Republic.","సార్వభౌమ, సామ్యవాద, లౌకిక, ప్రజాస్వామ్య, గణతంత్ర పదాలను చదవండి."],
-["Fundamental Rights","ప్రాథమిక హక్కులు","Fundamental Rights are mainly contained in Part III.","ప్రాథమిక హక్కులు ప్రధానంగా Part IIIలో ఉన్నాయి."],
-["Directive Principles","ఆదేశిక సూత్రాలు","Directive Principles are in Part IV.","ఆదేశిక సూత్రాలు Part IVలో ఉన్నాయి."],
-["Fundamental Duties","ప్రాథమిక కర్తవ్యాలు","Study the responsibilities of citizens.","పౌరుల బాధ్యతలను చదవండి."],
-["President and Prime Minister","రాష్ట్రపతి మరియు ప్రధానమంత్రి","Study their constitutional positions and functions.","వారి రాజ్యాంగ స్థానాలు మరియు విధులను చదవండి."],
-["Parliament","పార్లమెంట్","Parliament consists of the President, Lok Sabha and Rajya Sabha.","పార్లమెంట్‌లో రాష్ట్రపతి, లోక్‌సభ మరియు రాజ్యసభ ఉంటాయి."],
-["Supreme Court","సుప్రీంకోర్టు","The Supreme Court is the highest court of India.","సుప్రీంకోర్టు భారతదేశపు అత్యున్నత న్యాయస్థానం."]
-]
-},
-
-{
-name:"General Science",
-icon:"🔬",
-chapters:[
-["Motion and Force","చలనం మరియు బలం","Force can change the motion or shape of an object.","బలం వస్తువు చలనం లేదా ఆకారాన్ని మార్చగలదు."],
-["Work Power Energy","పని సామర్థ్యం శక్తి","Study work, power and energy and their basic formulas.","పని, సామర్థ్యం, శక్తి మరియు ప్రాథమిక సూత్రాలను చదవండి."],
-["Heat and Light","ఉష్ణం మరియు కాంతి","Study heat transfer, reflection and refraction.","ఉష్ణ బదిలీ, ప్రతిబింబం మరియు వక్రీభవనాన్ని చదవండి."],
-["Electricity","విద్యుత్","Current is the flow of electric charge.","కరెంట్ అంటే విద్యుత్ ఆవేశ ప్రవాహం."],
-["Human Body","మానవ శరీరం","Study heart, lungs, kidneys, digestive system and nervous system.","గుండె, ఊపిరితిత్తులు, మూత్రపిండాలు, జీర్ణ మరియు నాడీ వ్యవస్థలను చదవండి."],
-["Photosynthesis","కిరణజన్య సంయోగక్రియ","Plants use sunlight, water and carbon dioxide to make food.","మొక్కలు సూర్యకాంతి, నీరు మరియు కార్బన్ డయాక్సైడ్‌తో ఆహారం తయారు చేస్తాయి."]
-]
-},
-
-{
-name:"Indian Economy",
-icon:"💰",
-chapters:[
-["Basic Economy","ఆర్థిక వ్యవస్థ","Study production, distribution and consumption.","ఉత్పత్తి, పంపిణీ మరియు వినియోగాన్ని చదవండి."],
-["GDP","GDP","GDP measures the value of final goods and services produced within a country.","దేశంలో ఉత్పత్తి అయిన తుది వస్తువులు మరియు సేవల విలువను GDP కొలుస్తుంది."],
-["Inflation","ద్రవ్యోల్బణం","Inflation means a sustained rise in the general price level.","సాధారణ ధర స్థాయి నిరంతరం పెరగడాన్ని ద్రవ్యోల్బణం అంటారు."],
-["Money and Banking","డబ్బు మరియు బ్యాంకింగ్","Study functions of money and basic banking.","డబ్బు విధులు మరియు ప్రాథమిక బ్యాంకింగ్ చదవండి."],
-["RBI","RBI","RBI is India's central bank.","RBI భారతదేశ కేంద్ర బ్యాంకు."]
-]
-},
-
-{
-name:"English",
-icon:"🇬🇧",
-chapters:[
-["Parts of Speech","పద భేదాలు","Study noun, pronoun, verb, adjective, adverb, preposition and conjunction.","Noun, pronoun, verb, adjective, adverb, preposition, conjunction చదవండి."],
-["Articles","ఆర్టికల్స్","Learn correct use of a, an and the.","a, an, the సరైన ఉపయోగం నేర్చుకోండి."],
-["Tenses","కాలాలు","Study present, past and future tenses.","Present, Past, Future కాలాలను చదవండి."],
-["Subject Verb Agreement","కర్త క్రియ అన్వయం","Learn how subjects and verbs agree in number.","కర్త మరియు క్రియ మధ్య అన్వయం నేర్చుకోండి."],
-["Synonyms and Antonyms","పర్యాయ మరియు విరుద్ధ పదాలు","Build vocabulary with similar and opposite words.","సమాన మరియు వ్యతిరేక అర్థ పదాలతో పదజాలం పెంచుకోండి."],
-["Error Spotting","తప్పుల గుర్తింపు","Check grammar, tense, articles, prepositions and spelling.","వ్యాకరణం, tense, articles, prepositions మరియు spelling తప్పులను గుర్తించండి."]
-]
-},
-
-{
-name:"Current Affairs",
-icon:"📰",
-chapters:[
-["National Current Affairs","జాతీయ కరెంట్ అఫైర్స్","Revise major national events, schemes, appointments, awards and reports every month.","జాతీయ సంఘటనలు, పథకాలు, నియామకాలు, అవార్డులు మరియు నివేదికలను ప్రతి నెల చదవండి."],
-["Telangana Current Affairs","తెలంగాణ కరెంట్ అఫైర్స్","Follow important Telangana government schemes, projects and events.","తెలంగాణ ప్రభుత్వ పథకాలు, ప్రాజెక్టులు మరియు ముఖ్య సంఘటనలను గమనించండి."],
-["Sports","క్రీడలు","Study important tournaments, winners and records.","ముఖ్య టోర్నమెంట్లు, విజేతలు మరియు రికార్డులను చదవండి."],
-["Awards","అవార్డులు","Study important national and international awards.","ముఖ్య జాతీయ మరియు అంతర్జాతీయ అవార్డులను చదవండి."],
-["Important Days","ముఖ్య దినాలు","Learn important days, dates and themes.","ముఖ్య దినాలు, తేదీలు మరియు థీమ్స్ నేర్చుకోండి."]
-]
-}
-
-];
-
-
-/* ================================
-   APP VARIABLES
-================================ */
-
-var currentLanguage =
-localStorage.getItem("language") || "both";
-
-var completed =
-JSON.parse(localStorage.getItem("completed") || "{}");
-
-var selectedSubject = -1;
-var selectedChapter = -1;
-
-
-/* ================================
-   PAGE NAVIGATION
-================================ */
-
 function page(id,button){
 
 document.querySelectorAll("section").forEach(function(s){
-s.classList.add("hidden");
+    s.classList.add("hidden");
 });
 
 document.getElementById(id).classList.remove("hidden");
 
-if(button){
 document.querySelectorAll(".nav button").forEach(function(b){
-b.classList.remove("active");
+    b.classList.remove("active");
 });
-button.classList.add("active");
+
+if(button){
+    button.classList.add("active");
+}
+
+if(id === "home"){
+    renderHome();
+}
+
+if(id === "learn"){
+    renderLearn();
+}
+
+if(id === "daily"){
+    renderQuestions();
+}
+
+if(id === "revision"){
+    renderRevision();
+}
+
+if(id === "plan"){
+    // 4 month plan is already in HTML
 }
 
 window.scrollTo(0,0);
 }
 
-function renderSubjects(){
 
-var area=document.getElementById("subjectCards");
-area.innerHTML="";
+/* ================================
+   HOME
+================================ */
+
+function renderHome(){
+
+var subjectCards = document.getElementById("subjectCards");
+
+subjectCards.innerHTML = "";
+
+var totalChapters = 0;
 
 subjects.forEach(function(subject,index){
 
-var card=document.createElement("div");
-card.className="card click";
+totalChapters += subject.chapters.length;
 
-card.innerHTML=
-'<div class="icon">'+subject.icon+'</div>'+
-'<h3>'+subject.name+'</h3>'+
-'<p class="muted">'+subject.chapters.length+' Chapters</p>'+
-'<button class="action">📖 Start Learning</button>';
+var card = document.createElement("div");
 
-card.onclick=function(){
-page("learn",document.querySelectorAll(".nav button")[1]);
-showChapters(index);
+card.className = "card click";
+
+card.onclick = function(){
+    page("learn");
+    selectedSubject = index;
+    selectedChapter = -1;
+    renderLearn();
 };
 
-area.appendChild(card);
+card.innerHTML =
+"<div class='icon'>" + subject.icon + "</div>" +
+"<h3>" + subject.name + "</h3>" +
+"<p class='muted'>" +
+subject.chapters.length + " Chapters" +
+"</p>";
+
+subjectCards.appendChild(card);
 
 });
 
-updateStats();
+document.getElementById("subjectCount").textContent =
+subjects.length;
+
+document.getElementById("chapterCount").textContent =
+totalChapters;
+
+var completedCount = Object.keys(completed).length;
+
+document.getElementById("completedCount").textContent =
+completedCount;
+
+var percent = totalChapters > 0
+? Math.round((completedCount / totalChapters) * 100)
+: 0;
+
+document.getElementById("percent").textContent =
+percent + "%";
 }
 
-function updateStats(){
 
-var chapters=0;
+/* ================================
+   LEARN PATH
+================================ */
 
-subjects.forEach(function(s){
-chapters += s.chapters.length;
-});
+function renderLearn(){
 
-document.getElementById("subjectCount").textContent=subjects.length;
-document.getElementById("chapterCount").textContent=chapters;
-document.getElementById("completedCount").textContent=0;
-document.getElementById("percent").textContent="0%";
+var area = document.getElementById("learnArea");
 
-}
+area.innerHTML = "";
 
-function showChapters(index){
+if(selectedSubject === -1){
 
-selectedSubject=index;
+var html = "<h2>📚 Choose a Subject</h2><div class='grid'>";
 
-var subject=subjects[index];
-var area=document.getElementById("learnArea");
+subjects.forEach(function(subject,index){
 
-area.innerHTML=
-'<div class="reader">'+
-'<button class="back" onclick="page(\'home\',document.querySelector(\'.nav button\'))">← Back</button>'+
-'<h2>'+subject.icon+' '+subject.name+'</h2>'+
-'<p class="muted">Choose a chapter.</p>'+
-'</div>';
-
-var grid=document.createElement("div");
-grid.className="grid";
-
-subject.chapters.forEach(function(chapter,i){
-
-var card=document.createElement("div");
-card.className="card click";
-
-card.innerHTML=
-'<div class="icon">📖</div>'+
-'<h3>'+chapter[0]+'</h3>'+
-'<p class="muted">'+chapter[1]+'</p>'+
-'<button class="action">Start Lesson</button>';
-
-card.onclick=function(){
-showLesson(index,i);
-};
-
-grid.appendChild(card);
+html +=
+"<div class='card click' onclick='selectSubject(" + index + ")'>" +
+"<div class='icon'>" + subject.icon + "</div>" +
+"<h3>" + subject.name + "</h3>" +
+"<p class='muted'>" +
+subject.chapters.length + " Chapters" +
+"</p>" +
+"</div>";
 
 });
 
-area.appendChild(grid);
+html += "</div>";
+
+area.innerHTML = html;
+
+return;
 }
 
-function showLesson(subjectIndex,chapterIndex){
+var subject = subjects[selectedSubject];
 
-var subject=subjects[subjectIndex];
-var chapter=subject.chapters[chapterIndex];
+var html =
+"<button class='back' onclick='backSubjects()'>← All Subjects</button>" +
+"<h2>" + subject.icon + " " + subject.name + "</h2>";
 
-document.getElementById("learnArea").innerHTML=
+if(selectedChapter === -1){
 
-'<div class="reader">'+
-'<button class="back" onclick="showChapters('+subjectIndex+')">← Back</button>'+
-'<h2>'+subject.icon+' '+chapter[0]+'</h2>'+
-'<h3>'+chapter[1]+'</h3>'+
-'<p><b>English</b></p>'+
-'<p>'+chapter[2]+'</p>'+
-'<p><b>తెలుగు</b></p>'+
-'<p>'+chapter[3]+'</p>'+
-'<div class="important">⭐ Important: Revise this lesson after reading.</div>'+
-'<button class="action" onclick="completeLesson('+subjectIndex+','+chapterIndex+')">✅ Mark Lesson Complete</button>'+
-'</div>';
+html += "<div class='grid'>";
 
+subject.chapters.forEach(function(chapter,index){
+
+var key = selectedSubject + "-" + index;
+
+var done = completed[key] ? "✅ Completed" : "📖 Start Lesson";
+
+html +=
+"<div class='card click' onclick='selectChapter(" +
+index + ")'>" +
+"<h3>" + (index + 1) + ". " +
+chapter[0] + "</h3>" +
+"<p class='muted'>" +
+chapter[1] +
+"</p>" +
+"<p>" + done + "</p>" +
+"</div>";
+
+});
+
+html += "</div>";
+
+area.innerHTML = html;
+
+return;
 }
 
-function completeLesson(subjectIndex,chapterIndex){
+var chapter = subject.chapters[selectedChapter];
 
-var key=subjectIndex+"-"+chapterIndex;
+var key = selectedSubject + "-" + selectedChapter;
 
-completed[key]=true;
+var english = chapter[2];
 
-localStorage.setItem("completed",JSON.stringify(completed));
+var telugu = chapter[3];
 
-updateStats();
+var lesson = "";
 
-showLesson(subjectIndex,chapterIndex);
+if(currentLanguage === "en"){
+lesson =
+"<p><b>English:</b><br>" +
+english +
+"</p>";
 }
+
+else if(currentLanguage === "te"){
+lesson =
+"<p><b>తెలుగు:</b><br>" +
+telugu +
+"</p>";
+}
+
+else{
+lesson =
+"<p><b>English:</b><br>" +
+english +
+"</p>" +
+"<p><b>తెలుగు:</b><br>" +
+telugu +
+"</p>";
+}
+
+area.innerHTML =
+
+"<button class='back' onclick='backChapters()'>← Chapters</button>" +
+
+"<div class='reader'>" +
+
+"<h2>" + chapter[0] + "</h2>" +
+
+"<h3>" + chapter[1] + "</h3>" +
+
+lesson +
+
+"<div class='important'>" +
+"⭐ Important: Revise this lesson and practice questions after reading." +
+"</div>" +
+
+"<button class='action' onclick='completeLesson()'>" +
+(completed[key] ? "✅ Lesson Completed" : "✅ Mark as Completed") +
+"</button>" +
+
+"</div>";
+}
+
+
+/* ================================
+   SUBJECT SELECTION
+================================ */
+
+function selectSubject(index){
+
+selectedSubject = index;
+selectedChapter = -1;
+
+renderLearn();
+
+window.scrollTo(0,0);
+}
+
+
+/* ================================
+   CHAPTER SELECTION
+================================ */
+
+function selectChapter(index){
+
+selectedChapter = index;
+
+renderLearn();
+
+window.scrollTo(0,0);
+}
+
+
+/* ================================
+   BACK BUTTONS
+================================ */
+
+function backSubjects(){
+
+selectedSubject = -1;
+selectedChapter = -1;
+
+renderLearn();
+}
+
+
+function backChapters(){
+
+selectedChapter = -1;
+
+renderLearn();
+}
+
+
+/* ================================
+   COMPLETE LESSON
+================================ */
+
+function completeLesson(){
+
+if(selectedSubject === -1 ||
+selectedChapter === -1){
+return;
+}
+
+var key = selectedSubject + "-" + selectedChapter;
+
+completed[key] = true;
+
+localStorage.setItem(
+"completed",
+JSON.stringify(completed)
+);
+
+renderLearn();
+renderHome();
+}
+
+
+/* ================================
+   LANGUAGE
+================================ */
 
 function language(lang,button){
 
-currentLanguage=lang;
-localStorage.setItem("language",lang);
+currentLanguage = lang;
+
+localStorage.setItem(
+"language",
+lang
+);
 
 document.querySelectorAll(".lang button").forEach(function(b){
 b.classList.remove("active");
 });
 
+if(button){
 button.classList.add("active");
 }
 
+renderLearn();
+}
+
+
+/* ================================
+   DAILY QUESTIONS
+================================ */
+
+var questionsData = [
+
+{
+q:"What is 25% of 200?",
+options:["25","40","50","75"],
+answer:2
+},
+
+{
+q:"Who founded the Mauryan Empire?",
+options:["Ashoka","Chandragupta Maurya","Akbar","Harsha"],
+answer:1
+},
+
+{
+q:"Telangana became a separate state on which date?",
+options:["1 May 1960","2 June 2014","15 August 1947","26 January 1950"],
+answer:1
+},
+
+{
+q:"What is the capital of Telangana?",
+options:["Warangal","Karimnagar","Hyderabad","Nizamabad"],
+answer:2
+},
+
+{
+q:"Which is the highest court in India?",
+options:["High Court","District Court","Supreme Court","Sessions Court"],
+answer:2
+},
+
+{
+q:"What is the formula for Simple Interest?",
+options:[
+"P + R + T",
+"P × R × T ÷ 100",
+"P × T",
+"P ÷ R"
+],
+answer:1
+},
+
+{
+q:"Who was the 24th Tirthankara?",
+options:["Gautama Buddha","Mahavira","Ashoka","Chandragupta"],
+answer:1
+},
+
+{
+q:"Which river is one of the major rivers of Telangana?",
+options:["Godavari","Yamuna","Sutlej","Ganga"],
+answer:0
+}
+
+];
+
+
+function renderQuestions(){
+
+var area = document.getElementById("questions");
+
+area.innerHTML = "";
+
+var day =
+Math.floor(Date.now() / 86400000);
+
+var start =
+day % questionsData.length;
+
+for(var i=0;i<5;i++){
+
+var q =
+questionsData[(start+i) %
+questionsData.length];
+
+var html =
+"<div class='question'>" +
+
+"<h3>Q" + (i+1) + ". " +
+q.q +
+"</h3>";
+
+q.options.forEach(function(option,index){
+
+html +=
+"<button class='option' " +
+"onclick='checkAnswer(this," +
+index + "," +
+q.answer + ")'>" +
+option +
+"</button>";
+
+});
+
+html += "</div>";
+
+area.innerHTML += html;
+
+}
+}
+
+
+/* ================================
+   CHECK ANSWER
+================================ */
+
+function checkAnswer(button,selected,correct){
+
+var parent = button.parentElement;
+
+var options =
+parent.querySelectorAll(".option");
+
+options.forEach(function(option){
+option.disabled = true;
+});
+
+if(selected === correct){
+
+button.classList.add("correct");
+
+}else{
+
+button.classList.add("wrong");
+
+options[correct].classList.add("correct");
+
+}
+
+}
+
+
+/* ================================
+   QUICK REVISION
+================================ */
+
 function renderRevision(){
 
-var area=document.getElementById("revisionArea");
-area.innerHTML="";
+var area =
+document.getElementById("revisionArea");
+
+area.innerHTML = "";
 
 subjects.forEach(function(subject){
 
-var card=document.createElement("div");
-card.className="card";
+var html =
+"<div class='card'>" +
 
-var html='<div class="icon">'+subject.icon+'</div><h3>'+subject.name+'</h3>';
+"<h3>" +
+subject.icon + " " +
+subject.name +
+"</h3>";
 
 subject.chapters.forEach(function(chapter){
-html+='<p><b>'+chapter[0]+'</b><br><span class="muted">'+chapter[2]+'</span></p>';
+
+html +=
+"<p>" +
+"<b>" + chapter[0] + "</b><br>" +
+"<span class='muted'>" +
+chapter[2] +
+"</span>" +
+"</p>";
+
 });
 
-card.innerHTML=html;
-area.appendChild(card);
+html += "</div>";
+
+area.innerHTML += html;
 
 });
 }
 
-renderSubjects();
-renderRevision();
-updateStats();
+
+/* ================================
+   START APP
+================================ */
+
+renderHome();
+
+</script>
